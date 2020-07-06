@@ -18,8 +18,10 @@ package org.flywaydb.core.internal.database.vertica;
 import org.flywaydb.core.internal.database.base.Connection;
 import org.flywaydb.core.internal.database.base.Schema;
 import org.flywaydb.core.internal.exception.FlywaySqlException;
+import org.flywaydb.core.internal.jdbc.RowMapper;
 import org.flywaydb.core.internal.util.StringUtils;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class VerticaConnection extends Connection<VerticaDatabase> {
@@ -42,7 +44,18 @@ public class VerticaConnection extends Connection<VerticaDatabase> {
 
     @Override
     protected String getCurrentSchemaNameOrSearchPath() throws SQLException {
-        return jdbcTemplate.queryForString("SHOW SEARCH_PATH");
+        return jdbcTemplate.query("SHOW search_path", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet rs) throws SQLException {
+                // All "show" commands in Vertica return two columns: "name" and "setting",
+                // but we just want the value in the second column:
+                //
+                //     name     |                      setting
+                // -------------+---------------------------------------------------
+                // search_path | "$user", public, v_catalog, v_monitor, v_internal
+                return rs.getString("setting");
+            }
+        }).get(0);
     }
 
     @Override

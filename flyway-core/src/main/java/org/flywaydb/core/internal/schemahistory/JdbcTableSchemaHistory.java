@@ -89,7 +89,8 @@ class JdbcTableSchemaHistory extends SchemaHistory {
     public boolean exists() {
         connection.restoreOriginalState();
 
-        return table.exists();
+        return table != null ? table.exists() : false ;
+
     }
 
     @Override
