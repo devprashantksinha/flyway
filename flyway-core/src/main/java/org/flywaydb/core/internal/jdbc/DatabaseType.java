@@ -49,6 +49,7 @@ public enum DatabaseType {
     SYBASEASE_JTDS("Sybase ASE", Types.NULL, true),
     SYBASEASE_JCONNECT("Sybase ASE", Types.VARCHAR, true),
     SAPHANA("SAP HANA", Types.VARCHAR, true),
+    VERTICA("Vertica", Types.VARCHAR, true), //TODO : Check with Vertica Expert : https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/SQLReferenceManual/LanguageElements/Expressions/NULLValue.htm
     SNOWFLAKE("Snowflake", Types.VARCHAR, false);
 
     private final String name;
@@ -142,6 +143,9 @@ public enum DatabaseType {
         }
         if (databaseProductName.startsWith("Snowflake")) {
             return SNOWFLAKE;
+        }
+        if (databaseProductName.startsWith("Vertica")) {
+            return VERTICA;
         }
         throw new FlywayException("Unsupported Database: " + databaseProductName);
     }

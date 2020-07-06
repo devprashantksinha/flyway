@@ -65,6 +65,7 @@ public class DriverDataSource implements DataSource {
         SQLLITE("jdbc:sqlite:", "org.sqlite.JDBC"),
         SQLSERVER("jdbc:sqlserver:", "com.microsoft.sqlserver.jdbc.SQLServerDriver"),
         SYBASE("jdbc:sybase:", "com.sybase.jdbc4.jdbc.SybDriver"),
+        VERTICA("jdbc:vertica:", "com.vertica.jdbc.Driver"),
         TEST_CONTAINERS("jdbc:tc:", "org.testcontainers.jdbc.ContainerDatabaseDriver");
 
         DriverType(String prefix, String driverClass) {

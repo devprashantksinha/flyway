@@ -186,6 +186,7 @@
         <version.jre>11.0.2</version.jre>
         <version.jansi>1.18</version.jansi>
         <version.gson>2.8.6</version.gson>
+        <version.vertica>9.1.1-0</version.vertica>
     </properties>
 
     <dependencyManagement>
@@ -342,6 +343,12 @@
                 <groupId>com.ibm.informix</groupId>
                 <artifactId>jdbc</artifactId>
                 <version>4.50.3</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>com.vertica</groupId>
+                <artifactId>vertica-jdbc</artifactId>
+                <version>${version.vertica}</version>
                 <optional>true</optional>
             </dependency>
 
@@ -571,7 +578,6 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <release>8</release>
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
