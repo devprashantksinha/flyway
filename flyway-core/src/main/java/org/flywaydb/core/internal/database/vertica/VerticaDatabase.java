@@ -52,7 +52,7 @@ public class VerticaDatabase extends Database<VerticaConnection> {
 
     @Override
     public boolean supportsChangingCurrentSchema() {
-        return false; //PENDING
+        return true; //PENDING
     }
 
     @Override

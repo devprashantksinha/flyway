@@ -108,7 +108,7 @@ public class VerticaSchema extends Schema<VerticaDatabase,VerticaTable> {
 
     @Override
     public Table getTable(String tableName) {
-        return null;
+        return new VerticaTable(jdbcTemplate, database, this, tableName);
     }
 
     private List<String> generateDropStatementsForViews() throws SQLException {
